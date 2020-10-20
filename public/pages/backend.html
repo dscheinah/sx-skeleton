@@ -1,0 +1,19 @@
+<template>
+    <h1>Backend</h1>
+    <p>
+        This page shows some trivial interaction with the PHP backend and the global state management.<br/>
+        It simply loads a random list of prefixed numbers.
+    </p>
+    <!-- Be sure to always prefix your IDs with an unique page identifier. This is not done automatically. -->
+    <ul id="backend-list"></ul>
+    <form id="backend-form">
+        <input id="backend-input" type="text" name="input" required/>
+        <label for="backend-input">Prefix <small>send "error" to trigger an error</small></label>
+        <div class="sx-actions">
+            <button type="submit"><span class="sx-button-icon">↻</span> Refresh</button>
+        </div>
+    </form>
+</template>
+
+<!-- The script is separated to be testable. It will be included in the final build. -->
+<script type="module" src="./backend.js"></script>

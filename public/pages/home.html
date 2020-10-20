@@ -1,0 +1,27 @@
+<template>
+    <div id="home">
+        <h1>Home</h1>
+        <p>This page demonstrates the use of a local state without interaction.</p>
+        <span id="home-date"></span>
+    </div>
+</template>
+
+<script type="module">
+    import {helper, page} from '../js/app.js';
+
+    // The ID must match with the one provided at page creation in app.js.
+    page.register('home', ({render}) => {
+        // The provided callback will be called each time the page renders.
+        render(() => {
+            // By using the helpers you can omit boilerplate code (e.g. checking for element existence).
+            helper.set('#home-date', 'innerText', (new Date()).toLocaleString());
+        });
+    });
+</script>
+
+<style>
+    /* Make sure to prefix all selectors with an unique page identifier. Styles will always be effective globally. */
+    #home span {
+        color: var(--primary-color);
+    }
+</style>

@@ -1,0 +1,19 @@
+@import "../vendor/dscheinah/sx-css/src/button.css";
+@import "../vendor/dscheinah/sx-css/src/form.css";
+@import "../vendor/dscheinah/sx-css/src/layout.css";
+@import "../vendor/dscheinah/sx-css/src/menu.css";
+/* Only the modules required for the example are imported. Add more if needed. */
+
+:root {
+    /* Used for navigations and highlighted (non interactive) parts. */
+    --primary-color: gray;
+    --primary-color-highlight: lightgray;
+    --primary-color-inverse: white;
+    /* Used for interactive parts (buttons and errors). */
+    --secondary-color: gray;
+    --secondary-color-highlight: lightgrey;
+    --secondary-color-inverse: white;
+    /* Used for interactive highlights (anchors and focus). */
+    --tertiary-color: gray;
+    --tertiary-color-highlight: lightgrey;
+}

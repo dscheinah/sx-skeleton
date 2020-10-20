@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="sx-layout">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <title>sx|Skeleton</title>
+        <!-- The main CSS is loaded synchronously. More styles should be handles manually or in pages. -->
+        <link type="text/css" href="css/app.css" rel="stylesheet"/>
+        <script>
+            (function () {
+                /**
+                 * A very simple error handler that simply renders the message on top of the current page.
+                 * This prevents the current page from being usable.
+                 *
+                 * @param {string|Error|PromiseRejectionEvent} error
+                 */
+                const handler = function (error) {
+                    const container = document.createElement('div');
+                    container.innerHTML = `<div class="sx-error">${error.message || error.reason || error}</div>`;
+                    document.getElementById('main').appendChild(container);
+                };
+                window.onerror = handler;
+                window.onunhandledrejection = handler;
+            })();
+        </script>
+    </head>
+    <body>
+        <div class="sx-body">
+            <nav class="sx-menu">
+                <div class="sx-limit sx-navigation">
+                    <!-- The loading is initially visible and will be disabled with the first page load. -->
+                    <div id="loading" class="sx-loading">🖧</div>
+                    <div class="sx-navigation-buttons">
+                        <!-- To get a consistent hotkey behaviour, a JS controlled back button is inserted here. -->
+                        <button accesskey="u" id="navigation-back"></button>
+                        <button accesskey="1" data-navigation value="home">Home</button>
+                        <button accesskey="2" data-navigation value="backend">Backend</button>
+                        <!-- Add more navigation entries as needed. -->
+                    </div>
+                </div>
+            </nav>
+            <!-- CSS module prefixes must be added here. -->
+            <main id="main" class="sx-container sx-content sx-limit sx-form sx-button"></main>
+        </div>
+        <script type="module" src="js/app.js"></script>
+    </body>
+</html>

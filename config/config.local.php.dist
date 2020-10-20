@@ -1,0 +1,9 @@
+<?php
+
+// This file is used as is for docker deployment. So use getenv or similar methods for dynamic configuration.
+return [
+    // The env is used to control error output in index.php. Set it to 'production' to disable error output.
+    'env' => getenv('APP_ENV'),
+    // This can be used to prefix all routes. With that the app is not needed to be hosted on "/".
+    'prefix' => '',
+];

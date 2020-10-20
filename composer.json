@@ -1,0 +1,36 @@
+{
+    "name": "dscheinah/sx-skeleton",
+    "description": "This is a common setup for a simple sx application.",
+    "type": "project",
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "mnsami/composer-custom-directory-installer": "^2.0",
+        "dscheinah/sx-application": "dev-master",
+        "dscheinah/sx-css": "dev-master",
+        "dscheinah/sx-js": "dev-master"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AppTest\\": "test/src"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "installer-paths": {
+            "./public/vendor/{$vendor}/{$name}": ["dscheinah/sx-css", "dscheinah/sx-js"]
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c test/phpunit.xml --colors=always",
+        "test-coverage": "phpunit -c test/phpunit.xml --colors=always --coverage-clover test/clover.xml"
+    }
+}
