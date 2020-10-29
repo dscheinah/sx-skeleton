@@ -4,14 +4,14 @@
     "type": "project",
     "license": "GPL-3.0-or-later",
     "require": {
-        "mnsami/composer-custom-directory-installer": "^2.0",
-        "dscheinah/sx-application": "dev-master",
-        "dscheinah/sx-css": "dev-master",
-        "dscheinah/sx-js": "dev-master"
+        "dscheinah/sx-application": "^1.0",
+        "dscheinah/sx-css": "^1.0",
+        "dscheinah/sx-js": "^1.0",
+        "mnsami/composer-custom-directory-installer": "^2.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -23,10 +23,12 @@
             "AppTest\\": "test/src"
         }
     },
-    "minimum-stability": "dev",
     "extra": {
         "installer-paths": {
-            "./public/vendor/{$vendor}/{$name}": ["dscheinah/sx-css", "dscheinah/sx-js"]
+            "./public/vendor/{$vendor}/{$name}": [
+                "dscheinah/sx-css",
+                "dscheinah/sx-js"
+            ]
         }
     },
     "scripts": {
