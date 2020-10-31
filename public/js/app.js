@@ -1,11 +1,15 @@
 import Action from '../vendor/dscheinah/sx-js/src/Action.js';
 import Page from '../vendor/dscheinah/sx-js/src/Page.js';
 import State from '../vendor/dscheinah/sx-js/src/State.js';
+import init from './app/init.js';
+import navigate from './app/navigate.js';
+import * as data from './repository/data.js';
 // By separating the helpers to it's own namespace they do not need to packed to an object here.
 import * as helper from './helper.js';
 
 // Create the global event listener (on window) to be used for e.g. navigation.
 const action = new Action(window);
+// The repository that will handle the requests to the backend.
 // Create the global state manager.
 const state = new State();
 // Create the page manager responsible for lazy loading pages and handling the history and page stack.
@@ -13,33 +17,15 @@ const state = new State();
 // The state event gets the ID of the page as payload.
 const page = new Page(state, helper.element('#main'));
 
-// This defines the initial application state. This can also be loaded from e.g. localStorage or a backend.
-state.set('backend-data', ['initial data']);
+// Populate the initial application state.
+init(state);
 
 // Handle the global navigation. This also handles links in pages automatically.
-// To add a link use <a href="${id}" data-navigation></a> or <button value="${id}" data-navigation></button>.
+// To add a link use <button value="${id}" data-navigation>...</button>.
 // The IDs must correspond with the pages defined later in this file.
-action.listen('[data-navigation]', 'click', (event) => {
-    if (!event.target) {
-        return;
-    }
-    let id = event.target.value || event.target.href;
-    if (!id) {
-        return;
-    }
-    // As pages need to be fetched on first use, trigger the loading animation.
-    state.dispatch('loading', true);
-    page.show(id);
-});
+action.listen('[data-navigation]', 'click', (event) => navigate(state, page, event));
 // The navigation-back button is invisible but keyboard controllable.
-action.listen('#navigation-back', 'click', () => {
-    history.back();
-});
-
-// Always disable the loading animation when any loaded page is ready.
-state.listen('sx-show', () => {
-    state.dispatch('loading', false);
-});
+action.listen('#navigation-back', 'click', () => history.back());
 
 // A global state handler to show the loading animation.
 // Use state.dispatch('loading', true) to trigger the animation and state.dispatch('loading', false) to stop it.
@@ -48,21 +34,11 @@ state.handle('loading', (payload, next) => {
     helper.style('#loading', 'visibility', payload ? null : 'hidden');
     return next(payload);
 });
+// Always disable the loading animation when any loaded page is ready.
+state.listen('sx-show', () => state.dispatch('loading', false));
 
 // This is a simple example for async global state management.
-// Usually you will restructure this in separate files and repositories.
-state.handle('backend-data', async (payload) => {
-    let result = await fetch('list', {
-        method: 'POST',
-        body: payload,
-    });
-    if (result.ok) {
-        return result.json();
-    }
-    // This is just an example. Implement real error handling here.
-    // Never rely on throw to trigger the global error handler registered in index.html.
-    throw new Error(await result.text());
-});
+state.handle('backend-data', (payload) => data.load(payload));
 
 // Define all pages and load the main page. The ID defined here is globally used for:
 //  - handling navigation by href or value (see above)
