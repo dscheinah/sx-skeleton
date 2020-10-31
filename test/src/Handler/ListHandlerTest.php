@@ -6,7 +6,6 @@ use App\Handler\ListHandler;
 use AppTest\Handler\Mock\Response;
 use AppTest\Handler\Mock\ResponseHelper;
 use PHPUnit\Framework\TestCase;
-use Sx\Message\Response\Json;
 use Sx\Message\ServerRequest;
 
 class ListHandlerTest extends TestCase
