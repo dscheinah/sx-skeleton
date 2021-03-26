@@ -3,15 +3,12 @@
  * If an ID is found, it is assumed to be valid.
  * The state will be used to handle the loading animation. The page is used to do single page navigation.
  *
- * @param {State} state
- * @param {Page}  page
- * @param {Event} event
+ * @param {State}             state
+ * @param {Page}              page
+ * @param {Event}             event
+ * @param {HTMLButtonElement} target
  */
-export default function(state, page, event) {
-    const target = event.target;
-    if (!target) {
-        return;
-    }
+export default function(state, page, event, target) {
     let id = target.value;
     if (!id) {
         return;

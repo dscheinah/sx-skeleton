@@ -19,9 +19,7 @@ function defaults() {
         plugins: [
             // NodeResolve and CommonJS are needed to resolve the babel polyfills and runtime.
             rollupNodeResolve.nodeResolve({
-                customResolveOptions: {
-                    moduleDirectory: ['node_modules', `${path.dirname(__filename)}/../node_modules`],
-                },
+                moduleDirectories: ['node_modules', `${path.dirname(__filename)}/../node_modules`],
             }),
             rollupCommonJs(),
             rollupBabel.babel({

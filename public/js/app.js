@@ -23,7 +23,7 @@ init(state);
 // Handle the global navigation. This also handles links in pages automatically.
 // To add a link use <button value="${id}" data-navigation>...</button>.
 // The IDs must correspond with the pages defined later in this file.
-action.listen('[data-navigation]', 'click', (event) => navigate(state, page, event));
+action.listen('[data-navigation]', 'click', (event, target) => navigate(state, page, event, target));
 // The navigation-back button is invisible but keyboard controllable.
 action.listen('#navigation-back', 'click', () => history.back());
 

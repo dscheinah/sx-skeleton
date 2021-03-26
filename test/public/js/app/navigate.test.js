@@ -12,22 +12,16 @@ beforeEach(() => {
 });
 
 test('valid', () => {
-    event.target = document.createElement('button');
-    event.target.value = 'page1';
-    navigate(state, page, event);
+    const target = document.createElement('button');
+    target.value = 'page1';
+    navigate(state, page, event, target);
     expect(state.dispatch.mock.calls[0]).toEqual(['loading', true]);
     expect(page.show.mock.calls[0]).toEqual(['page1']);
 });
 
-test('empty', () => {
-    navigate(state, page, event);
-    expect(state.dispatch.mock.calls.length).toEqual(0);
-    expect(page.show.mock.calls.length).toEqual(0);
-});
-
 test('invalid', () => {
-    event.target = document.createElement('div');
-    navigate(state, page, event);
+    const target = document.createElement('div');
+    navigate(state, page, event, target);
     expect(state.dispatch.mock.calls.length).toEqual(0);
     expect(page.show.mock.calls.length).toEqual(0);
 });
