@@ -16,7 +16,7 @@ const dist = (file) => {
 };
 
 // To get a clean build everything is deleted.
-fs.rmdirSync('dist', {recursive: true});
+fs.rmSync('dist', {recursive: true, force: true});
 
 // Build all the JavaScript entry points.
 // All imports will be resolved. Export of the main file are kept to be used in pages.

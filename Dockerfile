@@ -14,7 +14,7 @@ COPY --from=vendor /app/public/vendor /public/vendor
 RUN node build.js
 
 # Create the final image.
-FROM php:7-apache
+FROM php:8-apache
 # Only files inside the public directory should be available from outside.
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \

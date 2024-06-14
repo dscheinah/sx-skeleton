@@ -34,5 +34,10 @@
     "scripts": {
         "test": "phpunit -c test/phpunit.xml --colors=always",
         "test-coverage": "phpunit -c test/phpunit.xml --colors=always --coverage-clover test/clover.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "mnsami/composer-custom-directory-installer": true
+        }
     }
 }
