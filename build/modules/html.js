@@ -6,10 +6,6 @@ const postHtml = require('posthtml');
 const postHtmlInlineAssets = require('posthtml-inline-assets');
 const postHtmlMinifier = require('posthtml-minifier');
 
-// A very simple hash to be used to refresh the browser caches of all files.
-// It is defined once, so that every import of the same file gets the same hash.
-const hash = Math.floor(Date.now() / 1000);
-
 // A simple wrapper that allows the usage of inline functions from css.js and js.js as PostHTML plugins.
 function plugin(callback, type) {
     return (tree) => {
@@ -30,7 +26,7 @@ const plugins = [
     plugin(css.inline, 'style'),
     postHtmlMinifier({
         collapseBooleanAttributes: true,
-        collapseInlineTagWhitespace: true,
+        collapseInlineTagWhitespace: false,
         collapseWhitespace: true,
         removeComments: true,
         removeRedundantAttributes: true,
@@ -42,10 +38,11 @@ module.exports = {
      * Minifies and writes the entry point HTML file to the dist folder.
      *
      * @param {string} file
+     * @param {string} hash
      *
      * @returns {Promise<void>}
      */
-    entry: async function (file) {
+    entry: async function (file, hash) {
         const html = fs.readFileSync(file);
         const result = await postHtml(plugins).process(html.toString());
         fs.writeFileSync(
@@ -56,13 +53,14 @@ module.exports = {
     },
     /**
      * Minifies and writes a page HTML file to the dist folder.
-     * In addition all directly referenced scripts are inlined.
+     * In addition, all directly referenced scripts are inlined.
      *
      * @param {string} file
+     * @param {string} hash
      *
      * @returns {Promise<void>}
      */
-    page: async function (file) {
+    page: async function (file, hash) {
         const html = fs.readFileSync(file);
         const result = await postHtml([
             postHtmlInlineAssets({

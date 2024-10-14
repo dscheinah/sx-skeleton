@@ -5,6 +5,10 @@ const html = require('./modules/html');
 const js = require('./modules/js');
 const path = require('path');
 
+// A very simple hash to be used to refresh the browser caches of all files.
+// It is defined once, so that every import of the same file gets the same hash.
+const hash = Math.floor(Date.now() / 1000).toString();
+
 /**
  * This is used to create the output folders for each file.
  *
@@ -24,7 +28,7 @@ fs.rmSync('dist', {recursive: true, force: true});
     '../public/js/app.js',
 ].forEach((file) => {
     dist(file);
-    js.entry(file).catch((error) => {
+    js.entry(file, hash).catch((error) => {
         console.error(error.message);
         process.exit(1);
     });
@@ -47,7 +51,7 @@ fs.rmSync('dist', {recursive: true, force: true});
     '../public/index.html',
 ].forEach((file) => {
     dist(file);
-    html.entry(file).catch((error) => {
+    html.entry(file, hash).catch((error) => {
         console.error(error.message);
         process.exit(3);
     });
@@ -58,7 +62,7 @@ fs.rmSync('dist', {recursive: true, force: true});
     ...glob.sync('../public/pages/**/*.html'),
 ].forEach((file) => {
     dist(file);
-    html.page(file).catch((error) => {
+    html.page(file, hash).catch((error) => {
         console.error(error.message);
         process.exit(4);
     });
