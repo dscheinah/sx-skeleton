@@ -7,6 +7,12 @@ import * as data from './repository/data.js';
 // By separating the helpers to it's own namespace they do not need to packed to an object here.
 import * as helper from './helper.js';
 
+// Only allow one app to be run. This may happen, if browser cache loads an outdated page for some reason.
+if (window.sxAppInitialized) {
+    throw new Error('Tried to access a cached app. Please reload the page.');
+}
+window.sxAppInitialized = true;
+
 // Create the global event listener (on window) to be used for e.g. navigation.
 const action = new Action(window);
 // The repository that will handle the requests to the backend.
