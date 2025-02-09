@@ -7,3 +7,7 @@
 /test/coverage
 /test/node_modules
 /vendor
+.*
+docker-compose.override.yml
+!.gitignore
+!.*.dist
