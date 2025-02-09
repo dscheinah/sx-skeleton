@@ -1,0 +1,6 @@
+# syntax = edrevo/dockerfile-plus
+
+INCLUDE+ ./Dockerfile
+
+FROM vendor
+RUN pecl install xdebug && docker-php-ext-enable xdebug
