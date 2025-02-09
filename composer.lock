@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19b6dfde655016d5b73a2135eb0d3b75",
+    "content-hash": "7e569ae8a52b0d1542d30dd28e2751c3",
     "packages": [
         {
             "name": "dscheinah/sx-application",
@@ -46,6 +46,44 @@
                 "source": "https://github.com/dscheinah/sx-application/tree/1.0.1"
             },
             "time": "2023-04-27T20:24:39+00:00"
+        },
+        {
+            "name": "dscheinah/sx-config",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dscheinah/sx-config.git",
+                "reference": "b06cb4b742d5abab3a447006c01ef765596f8bfc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dscheinah/sx-config/zipball/b06cb4b742d5abab3a447006c01ef765596f8bfc",
+                "reference": "b06cb4b742d5abab3a447006c01ef765596f8bfc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sx\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Config file provider and aggregator used by dscheinah/sx-skeleton.",
+            "support": {
+                "issues": "https://github.com/dscheinah/sx-config/issues",
+                "source": "https://github.com/dscheinah/sx-config/tree/v1.0.0"
+            },
+            "time": "2025-02-09T19:03:40+00:00"
         },
         {
             "name": "dscheinah/sx-container",

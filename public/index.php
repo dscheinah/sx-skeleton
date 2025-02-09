@@ -1,6 +1,7 @@
 <?php
 
 use App\Container\Provider;
+use Sx\Config\ConfigProvider;
 use Sx\Container\Injector;
 use Sx\Message\ServerRequestFactory;
 use Sx\Message\UriFactory;
@@ -8,14 +9,12 @@ use Sx\Server\ApplicationInterface;
 
 $baseDirectory = dirname(__DIR__);
 // Activate composer auto-loading.
-require $baseDirectory . '/vendor/autoload.php';
+require "$baseDirectory/vendor/autoload.php";
 
 // Load configuration from the config dir. All files are merged in alphabetical order.
-$options = [];
-foreach (glob($baseDirectory . '/config/*.php') as $file) {
-    $options[] = include $file;
-}
-$options = array_merge([], ...$options);
+$configProvider = new ConfigProvider();
+$configProvider->loadFiles("$baseDirectory/config/*.php");
+$options = $configProvider->getConfig();
 
 // Turn on error reporting if not in production environment according to configuration.
 if (($options['env'] ?? '') === 'production') {
