@@ -16,7 +16,7 @@ use Sx\Server\Container\ServerProvider;
 use Sx\Server\RouterInterface;
 
 /**
- * This class is used in index.php to setup the dependency injector.
+ * This class is used in index.php to set up the dependency injector.
  */
 class Provider implements ProviderInterface
 {

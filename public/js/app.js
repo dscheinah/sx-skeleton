@@ -4,7 +4,7 @@ import State from '../vendor/dscheinah/sx-js/src/State.js';
 import init from './app/init.js';
 import navigate from './app/navigate.js';
 import * as data from './repository/data.js';
-// By separating the helpers to it's own namespace they do not need to packed to an object here.
+// By separating the helpers to its own namespace they do not need to packed to an object here.
 import * as helper from './helper.js';
 
 // Only allow one app to be run. This may happen, if browser cache loads an outdated page for some reason.
