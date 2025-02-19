@@ -2,17 +2,20 @@
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
     "babel-jest": "^29.7.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   },
   "jest": {
-    "rootDir": "..",
-    "moduleDirectories": ["node_modules", "public"],
-    "collectCoverageFrom": ["public/js/**/*.js", "public/pages/**/*.js"],
-    "coverageDirectory": "test/coverage",
-    "setupFiles": ["./test/public/setup.js"]
+    "moduleDirectories": [
+      "node_modules",
+      "public"
+    ],
+    "setupFiles": [
+      "./public/setup.js"
+    ],
+    "testEnvironment": "jsdom"
   },
   "scripts": {
-    "test": "jest",
-    "test-coverage": "jest --collect-coverage"
+    "test": "jest"
   }
 }
