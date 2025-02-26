@@ -12,6 +12,10 @@ function plugin(callback, type) {
         let promises = [];
         tree.walk((node) => {
             if (node.tag === type && node.content) {
+                if (type === 'script' && node.attrs?.type === 'importmap') {
+                    node.content = '';
+                    return node;
+                }
                 promises.push(callback(node.content.toString()).then(script => node.content = script));
             }
             return node;

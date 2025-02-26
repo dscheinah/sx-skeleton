@@ -19,7 +19,10 @@ function defaults() {
         plugins: [
             // NodeResolve and CommonJS are needed to resolve the babel polyfills and runtime.
             rollupNodeResolve.nodeResolve({
-                modulePaths: ['node_modules', path.normalize(`${path.dirname(__filename)}/../node_modules`)],
+                modulePaths: [
+                    'node_modules',
+                    path.normalize(`${path.dirname(__filename)}/../node_modules`),
+                ],
             }),
             rollupCommonJs(),
             rollupBabel.babel({
@@ -52,10 +55,10 @@ module.exports = {
         options.input = file;
         options.output.file = file.replace('../public/', 'dist/');
         options.output.compact = true;
-        options.plugins.push({
+        options.plugins.unshift({
             transform(code) {
                 return {
-                    code: code.replace(/\/(.*?)\.(html)/ig, `/$1.$2?${hash}`),
+                    code: code.replace(/\/(.*?)\.(html)(\W)/ig, `/$1.$2?${hash}$3`),
                     map: null,
                 }
             }
@@ -79,7 +82,7 @@ module.exports = {
             // As there is no file an extra plugin is needed.
             // Relative paths are masked to prevent rollup from replacing them with absolute file system paths.
             rollupVirtual({
-                code: script.replace('./', 'cwd-replacement')
+                code: script.replaceAll('./', 'cwd-replacement')
             }),
         );
         const bundle = await rollup.rollup(options);
@@ -87,7 +90,7 @@ module.exports = {
         const content = [];
         for (const asset of output) {
             // Undo the mask of relative paths (see above).
-            content.push(asset.code.replace('cwd-replacement', './'));
+            content.push(asset.code.replaceAll('cwd-replacement', './'));
         }
         return content;
     },
