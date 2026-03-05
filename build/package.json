@@ -8,7 +8,7 @@
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-virtual": "^3.0.2",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-terser": "^1.0.0",
     "glob": "^8.1.0",
     "postcss": "^8.3.2",
     "postcss-csso": "^6.0.1",
